@@ -1,41 +1,54 @@
 import { useRef, useState, useEffect } from "react";
+import axios from "axios";
 
 const Inicio = () => {
   const userRef = useRef();
-  const errRef = useRef();
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
   }, []);
 
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (user == "admin" && pwd == "12345") {
-      console.log(user, pwd);
-      setUser("");
-      setPwd("");
-      setSuccess(true);
-      window.location.href = "/mapa";
-    } else {
+
+    var body = {
+      correo: document.getElementById("username").value,
+      password: document.getElementById("password").value,
+    };
+
+    if (user !== "" && pwd !== "") {
+      axios
+        .post("http://192.168.70.139:9090/auth/login", body)
+        .then((response) => {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("correo", response.data.correo);
+          setSuccess(true);
+          setPwd("");
+          document.getElementById("help").innerHTML = "";
+          window.location.href = "/mapa";
+        })
+        .catch((error) => {
+          if (error.response.status === 400) {
+            console.log("Error 400: Bad Request");
+          }
+          document.getElementById("help").style.color = "red";
+          document.getElementById("help").innerHTML =
+            "Usuario o contraseña incorrecto";
+        });
+    } else if (user === "" || pwd === "") {
       document.getElementById("help").style.color = "red";
-      document.getElementById("help").innerHTML =
-        "Usuario o contraseña incorrecta";
+      document.getElementById("help").innerHTML = "Debe llenar ambos campos";
     }
   };
 
   return (
     <>
       {success ? (
-        <div className="Login">
-          <h3>Bienvenido</h3>
+        <div>
+          <h3>Bienvenido, redirigiendo...</h3>
         </div>
       ) : (
         <div className="Login">
@@ -55,10 +68,9 @@ const Inicio = () => {
                 value={user}
                 aria-describedby="help"
                 placeholder="Ingresa tu Usuario"
-                required
               />
               <p id="help" className="form-text">
-                No compartiremos tu email con nadie más
+                No compartiremos tu email con nadie
               </p>
             </div>
             <br />
@@ -71,7 +83,6 @@ const Inicio = () => {
                 onChange={(e) => setPwd(e.target.value)}
                 value={pwd}
                 placeholder="Contraseña"
-                required
               />
             </div>
             <br />
