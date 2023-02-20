@@ -8,7 +8,7 @@ export default class Mapa extends Component {
                 <Navigation />
                 <p>
                     <iframe
-                        src='https://es.batchgeo.com/map/bbb2f203cf6719057017b4d0fc2e7884'
+                        src='https://es.batchgeo.com/map/ecf31f57b6648746dc34ed6128b8d7ef'
                         frameborder='0'
                         width='100%'
                         height='1050'
