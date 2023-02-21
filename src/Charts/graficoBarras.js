@@ -19,9 +19,7 @@ class GraficoBarras extends React.Component {
     this.state = {
       caja: '',
       datosBD1: [645645,403401,201201],
-      datosBD2: [410000,200000,600000],
       name1: "2023",
-      name2: "2022",
       // To avoid unnecessary update keep all options in the state.
       chartOptions: {
         chart: {
@@ -73,14 +71,24 @@ class GraficoBarras extends React.Component {
   componentDidMount(){
 
     const caja = this.props.params.caja;
+    const config = {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+          }
+    }
 
-    var url = 'http://192.168.70.139:9090/graficos/graficoAnual/';
+    var url = 'http://192.168.70.139:9090/graficos/graficoAnual/' + caja;
     
 
     //Obtener el total de todas las cajas
     axios 
-      .get(url)
-      .then((response) => console.log(response))
+      .get(url, config)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error)=> {
+        console.log(error);
+      });
 
 
     this.setState({
@@ -92,10 +100,6 @@ class GraficoBarras extends React.Component {
           name: this.state.name1,
           data: this.state.datosBD1
 
-        },
-        {
-          name: this.state.name2,
-          data: this.state.datosBD2
         }]
       }
     })

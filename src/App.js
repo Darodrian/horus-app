@@ -8,7 +8,7 @@ import TinyBarChart from './Charts/TinyBarChart';
 import GraficoCombinado from './Charts/GraficoCombindo';
 import GraficoDeTorta from './Charts/PieChart';
 import GraficoDeLinea from './Charts/LineChart';
-import Inicio from './components/Inicio';
+import Inicio from './components/Inicio2';
 import Mapa from './components/Mapa';
 import Prueba from './components/Prueba';
 
