@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 
-const Inicio = () => {
+const Login = () => {
   const userRef = useRef();
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
@@ -96,4 +96,4 @@ const Inicio = () => {
   );
 };
 
-export default Inicio;
+export default Login;

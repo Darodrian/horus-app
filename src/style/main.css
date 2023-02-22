@@ -1,33 +1,47 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
 .App {
   text-align: center;
 }
 
-.row{
+.row {
   display: flex;
   flex-wrap: wrap;
 }
 
-.Grafico{
+.Grafico {
   text-align: center;
   align-items: center;
   margin-top: 20px;
   padding-left: 7%;
 }
 
-.GraficoTitulo{
+.GraficoTitulo {
   text-align: center;
   align-items: center;
   margin-top: 20px;
 }
 
-.Login{
+.Login {
   text-align: center;
   padding-left: 40%;
   padding-right: 40%;
   padding-top: 2%;
 }
 
-.mapa{
+.mapa {
   text-align: center;
   align-items: center;
 }
