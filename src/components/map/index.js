@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import Navigation from "../nav-bar";
 
 export default class Mapa extends Component {
   render() {
     return (
       <div className="mapa">
-        <Navigation />
         <p>
           <iframe
             src="https://es.batchgeo.com/map/ecf31f57b6648746dc34ed6128b8d7ef"

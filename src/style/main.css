@@ -12,6 +12,32 @@ code {
     monospace;
 }
 
+.header{
+  background-color: #418fde;
+  line-height: 23px;
+  font-weight: 500;
+  width: 100%;
+  
+}
+
+.logo{
+  width: auto;
+  height: 50px;
+  display: inline-block;
+  float: none;
+  vertical-align: middle;
+}
+
+.footer{
+  background-color: #282c34;
+  vertical-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
 .App {
   text-align: center;
 }
