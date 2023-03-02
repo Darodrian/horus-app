@@ -1,54 +1,71 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import axios from "axios";
+import AuthContext from "../auth-provider";
+import LoadingSpinner from "./../loading-spinner/index";
+
+const url = "http://192.168.70.139:9090/auth/login";
 
 const Login = () => {
   const userRef = useRef();
+  const errRef = useRef();
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
+  const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
     userRef.current.focus();
+    localStorage.length !== 0 ? setSuccess(true) : setSuccess(false);
   }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [user, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    var body = {
-      correo: document.getElementById("username").value,
-      password: document.getElementById("password").value,
-    };
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        url,
+        JSON.stringify({ correo: user, password: pwd }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-    if (user !== "" && pwd !== "") {
-      axios
-        .post("http://192.168.70.139:9090/auth/login", body)
-        .then((response) => {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("correo", response.data.correo);
-          setSuccess(true);
-          setPwd("");
-          document.getElementById("help").innerHTML = "";
-          window.location.href = "/mapa";
-        })
-        .catch((error) => {
-          if (error.response.status === 400) {
-            console.log("Error 400: Bad Request");
-          }
-          document.getElementById("help").style.color = "red";
-          document.getElementById("help").innerHTML =
-            "Usuario o contraseña incorrecto";
-        });
-    } else if (user === "" || pwd === "") {
-      document.getElementById("help").style.color = "red";
-      document.getElementById("help").innerHTML = "Debe llenar ambos campos";
+      const accessToken = response?.data?.token;
+      localStorage.setItem("token", accessToken);
+      localStorage.setItem("correo", user);
+      setAuth({ user, pwd, accessToken });
+      setUser("");
+      setPwd("");
+      setSuccess(true);
+    } catch (err) {
+      document.getElementById("error").style.color = "red";
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Invalid Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      setLoading(false);
+      errRef.current.focus();
     }
   };
 
   return (
     <>
       {success ? (
-        <div>
-          <h3>Bienvenido, redirigiendo...</h3>
+        <div className="Welcome">
+          <h1>Bienvenido</h1>
+          <a href="/mapa">Ir al mapa</a>
         </div>
       ) : (
         <div className="Login">
@@ -73,7 +90,6 @@ const Login = () => {
                 No compartiremos tu email con nadie
               </p>
             </div>
-            <br />
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
               <input
@@ -86,9 +102,13 @@ const Login = () => {
               />
             </div>
             <br />
+            <p id="error" className="form-error" ref={errRef}>
+              {errMsg}
+            </p>
             <button type="submit" className="btn btn-dark">
               Entrar
             </button>
+            <div>{loading ? <LoadingSpinner /> : <></>}</div>
           </form>
         </div>
       )}

@@ -12,15 +12,14 @@ code {
     monospace;
 }
 
-.header{
+.header {
   background-color: #418fde;
   line-height: 23px;
   font-weight: 500;
   width: 100%;
-  
 }
 
-.logo{
+.logo {
   width: auto;
   height: 50px;
   display: inline-block;
@@ -28,7 +27,7 @@ code {
   vertical-align: middle;
 }
 
-.footer{
+.footer {
   background-color: #282c34;
   vertical-align: center;
   position: fixed;
@@ -40,6 +39,11 @@ code {
 
 .App {
   text-align: center;
+}
+
+.Welcome {
+  text-align: center;
+  padding-top: 20px;
 }
 
 .row {
@@ -105,4 +109,27 @@ code {
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  width: 25px;
+  height: 25px;
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #383636; /* Black */
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.spinner-container {
+  display: inline-block;
+  margin: 20px;
 }
