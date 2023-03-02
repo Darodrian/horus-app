@@ -18,8 +18,6 @@ class GraficoBarras extends React.Component {
 
     this.state = {
       caja: '',
-      datosBD1: [645645,403401,201201],
-      name1: "2023",
       // To avoid unnecessary update keep all options in the state.
       chartOptions: {
         chart: {
@@ -29,7 +27,7 @@ class GraficoBarras extends React.Component {
             text: 'Registro de ventas total'
           },
           subtitle: {
-            text: 'subtitulo'
+            text: 'Desde Enero a Marzo'
           },
           xAxis: {
             categories: [
@@ -47,7 +45,7 @@ class GraficoBarras extends React.Component {
           },
           tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">$ </td>' +
+            pointFormat: '<tr><td style="padding:0">$ </td>' +
               '<td style="padding:0"><b>{point.y}</b></td></tr>',
             footerFormat: '</table>',
             shared: true,
@@ -73,7 +71,7 @@ class GraficoBarras extends React.Component {
     const caja = this.props.params.caja;
     const config = {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem("token")}`
+           'Authorization': `Bearer ${localStorage.getItem("token")}`
           }
     }
 
@@ -84,25 +82,25 @@ class GraficoBarras extends React.Component {
     axios 
       .get(url, config)
       .then((response) => {
-        console.log(response)
+        this.setState({
+          chartOptions: {
+            title:{
+              text: "Registro total de ventas de la caja N° " + caja
+            },
+            series: [{
+              name: response.data[0].name,
+              data: response.data[0].data
+    
+            }]
+          }
+        })
       })
       .catch((error)=> {
         console.log(error);
       });
 
 
-    this.setState({
-      chartOptions: {
-        title:{
-          text: "Registro total de ventas de la caja N° " + caja
-        },
-        series: [{
-          name: this.state.name1,
-          data: this.state.datosBD1
 
-        }]
-      }
-    })
   }
 
   setHoverData = (e) => {
@@ -115,7 +113,7 @@ class GraficoBarras extends React.Component {
     const { chartOptions, hoverData } = this.state;
 
     return (
-      <div>
+      <div class="p-4">
         <HighchartsReact
           highcharts={Highcharts}
           options={chartOptions}
