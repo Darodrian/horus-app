@@ -6,7 +6,7 @@ export default class Mapa extends Component {
       <div className="mapa">
         <p>
           <iframe
-            src="https://es.batchgeo.com/map/ecf31f57b6648746dc34ed6128b8d7ef"
+            src="https://es.batchgeo.com/map/1960215780061ca82a3bc41415371e85"
             frameborder="0"
             width="100%"
             height="1050"
