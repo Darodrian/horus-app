@@ -3,7 +3,7 @@ import axios from "axios";
 import AuthContext from "../auth-provider";
 import LoadingSpinner from "./../loading-spinner/index";
 
-const url = "http://192.168.70.139:9090/auth/login";
+const url = "https://horus.caschile.cl/auth/login";
 
 const Login = () => {
   const userRef = useRef();

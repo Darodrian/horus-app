@@ -75,7 +75,7 @@ class GraficoBarras extends React.Component {
           }
     }
 
-    var url = 'http://192.168.70.139:9090/graficos/graficoAnual/' + caja;
+    var url = 'https://horus.caschile.cl/graficos/graficoAnual/' + caja;
     
 
     //Obtener el total de todas las cajas
