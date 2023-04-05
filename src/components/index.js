@@ -10,6 +10,7 @@ import Footer from "./footer";
 function App() {
   return (
     <>
+    
       <Header />
       <Router>
         <Routes>
@@ -19,6 +20,7 @@ function App() {
         </Routes>
       </Router>
       <Footer />
+      
     </>
   );
 }

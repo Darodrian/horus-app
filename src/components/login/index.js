@@ -2,8 +2,9 @@ import { useRef, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AuthContext from "../auth-provider";
 import LoadingSpinner from "./../loading-spinner/index";
+import { Box, Grid } from '@mui/material';
 
-const url = "https://horus.caschile.cl/auth/login";
+const url = "https://apihorus.caschile.cl/auth/login";
 
 const Login = () => {
   const userRef = useRef();
@@ -69,47 +70,74 @@ const Login = () => {
         </div>
       ) : (
         <div className="Login">
-          <h1>Login</h1>
-          <br />
-          <br />
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="username">Usuario</label>
-              <input
-                type="text"
-                id="username"
-                className="form-control"
-                ref={userRef}
-                autoComplete="off"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                aria-describedby="help"
-                placeholder="Ingresa tu Usuario"
-              />
-              <p id="help" className="form-text">
-                No compartiremos tu email con nadie
-              </p>
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Contraseña</label>
-              <input
-                type="password"
-                id="password"
-                className="form-control"
-                onChange={(e) => setPwd(e.target.value)}
-                value={pwd}
-                placeholder="Contraseña"
-              />
-            </div>
-            <br />
-            <p id="error" className="form-error" ref={errRef}>
-              {errMsg}
-            </p>
-            <button type="submit" className="btn btn-dark">
-              Entrar
-            </button>
-            <div>{loading ? <LoadingSpinner /> : <></>}</div>
-          </form>
+          <Grid container rowSpacing={4} alignItems="center" justifyContent="center" >
+            <Grid item xs={12}>
+              <Box textAlign="center">
+
+                <div className="Titulo" > Login</div>
+
+              </Box>
+            </Grid>
+
+            <form onSubmit={handleSubmit}>
+
+              <Grid item xs={12}>
+                <Box textAlign="center" lineHeight={3}>
+
+                  <div className="form-group">
+                    <label htmlFor="username">Usuario</label>
+
+                    <input
+                      type="text"
+                      id="username"
+                      className="form-control"
+                      ref={userRef}
+                      autoComplete="off"
+                      onChange={(e) => setUser(e.target.value)}
+                      value={user}
+                      aria-describedby="help"
+                      placeholder="Ingresa tu Usuario"
+                    />
+                  </div>
+
+                </Box>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Box textAlign="center" lineHeight={3}>
+
+                  <div className="form-group">
+                    <label htmlFor="password">Contraseña</label>
+                    <input
+                      type="password"
+                      id="password"
+                      className="form-control"
+                      onChange={(e) => setPwd(e.target.value)}
+                      value={pwd}
+                      placeholder="Contraseña"
+                    />
+                  </div>
+
+                </Box>
+              </Grid>
+              <br />
+              <Grid item xs={12}>
+                <Box textAlign="center" lineHeight={3}>
+
+                  <p id="error" className="form-error" ref={errRef}>
+                    {errMsg}
+                  </p>
+                  <button type="submit" className="btn btn-dark">
+                    Entrar
+                  </button>
+                  <div>{loading ? <LoadingSpinner /> : <></>}</div>
+
+                </Box>
+              </Grid>
+
+            </form>
+
+          </Grid>
         </div>
       )}
     </>
