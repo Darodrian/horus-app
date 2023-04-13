@@ -71,7 +71,7 @@ class GraficoBarras extends React.Component {
     const caja = this.props.params.caja;
     const config = {
           headers: {
-           'Authorization': `Bearer ${localStorage.getItem("token")}`
+           'Authorization': `Bearer ${sessionStorage.getItem("token")}`
           }
     }
 

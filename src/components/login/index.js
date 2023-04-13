@@ -18,7 +18,7 @@ const Login = () => {
 
   useEffect(() => {
     userRef.current.focus();
-    localStorage.length !== 0 ? setSuccess(true) : setSuccess(false);
+    sessionStorage.length !== 0 ? setSuccess(true) : setSuccess(false);
   }, []);
 
   useEffect(() => {
@@ -39,12 +39,13 @@ const Login = () => {
       );
 
       const accessToken = response?.data?.token;
-      localStorage.setItem("token", accessToken);
-      localStorage.setItem("correo", user);
+      sessionStorage.setItem("token", accessToken);
+      sessionStorage.setItem("correo", user);
       setAuth({ user, pwd, accessToken });
       setUser("");
       setPwd("");
       setSuccess(true);
+      window.location.href = "/mapa";
     } catch (err) {
       document.getElementById("error").style.color = "red";
       if (!err?.response) {
@@ -63,12 +64,13 @@ const Login = () => {
 
   return (
     <>
-      {success ? (
-        <div className="Welcome">
-          <h1>Bienvenido</h1>
-          <a href="/mapa">Ir al mapa</a>
-        </div>
-      ) : (
+      {success ? ( 
+        <Box textAlign="center">
+          <LoadingSpinner>
+            {window.location.href = "/mapa"}
+          </LoadingSpinner>
+        </Box>
+        ) : (
         <div className="Login">
           <Grid container rowSpacing={4} alignItems="center" justifyContent="center" >
             <Grid item xs={12}>
