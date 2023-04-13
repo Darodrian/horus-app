@@ -3,10 +3,10 @@ import logo from "../../assets/logoblanco.png";
 
 export default function Header() {
   const [isLoggedIn, setLogin] = useState();
-  const [user, setUser] = useState(sessionStorage.getItem("correo"));
+  const [user, setUser] = useState(localStorage.getItem("correo"));
 
   useEffect(() => {
-    sessionStorage.length !== 0 ? setLogin(true) : setLogin(false);
+    localStorage.length !== 0 ? setLogin(true) : setLogin(false);
   }, []);
 
   useEffect(() => {
@@ -18,9 +18,8 @@ export default function Header() {
   }, [user])
 
   const handleLogout = () => {
-    if (sessionStorage.length > 0) {
+    if (localStorage.length > 0) {
       localStorage.clear();
-      sessionStorage.clear();
       setLogin(false)
       setUser(null)
       window.location.href = "/";

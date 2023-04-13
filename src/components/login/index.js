@@ -18,7 +18,7 @@ const Login = () => {
 
   useEffect(() => {
     userRef.current.focus();
-    sessionStorage.length !== 0 ? setSuccess(true) : setSuccess(false);
+    localStorage.length !== 0 ? setSuccess(true) : setSuccess(false);
   }, []);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Login = () => {
 
       const accessToken = response?.data?.token;
       localStorage.setItem("token", accessToken);
-      sessionStorage.setItem("correo", user);
+      localStorage.setItem("correo", user);
       setAuth({ user, pwd, accessToken });
       setUser("");
       setPwd("");
