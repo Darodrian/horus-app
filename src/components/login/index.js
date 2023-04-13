@@ -39,7 +39,7 @@ const Login = () => {
       );
 
       const accessToken = response?.data?.token;
-      sessionStorage.setItem("token", accessToken);
+      localStorage.setItem("token", accessToken);
       sessionStorage.setItem("correo", user);
       setAuth({ user, pwd, accessToken });
       setUser("");

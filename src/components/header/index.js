@@ -19,6 +19,7 @@ export default function Header() {
 
   const handleLogout = () => {
     if (sessionStorage.length > 0) {
+      localStorage.clear();
       sessionStorage.clear();
       setLogin(false)
       setUser(null)
