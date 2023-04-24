@@ -17,7 +17,6 @@ const Login = () => {
   //const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
-    localStorage.clear();
     localStorage.length !== 0 ? setSuccess(true) : setSuccess(false);
     userRef.current.focus();
   }, []);
