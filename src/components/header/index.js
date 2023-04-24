@@ -22,7 +22,7 @@ export default function Header() {
       localStorage.clear();
       setLogin(false)
       setUser(null)
-      window.location.href = "/";
+      window.location.reload()
     }
   }
 

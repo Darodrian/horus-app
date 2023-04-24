@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import axios from "axios";
-import AuthContext from "../auth-provider";
 import LoadingSpinner from "./../loading-spinner/index";
 import { Box, Grid } from '@mui/material';
+//import AuthContext from "../auth-provider";
 
 const url = "https://apihorus.caschile.cl/auth/login";
 
@@ -14,11 +14,12 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { setAuth } = useContext(AuthContext);
+  //const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
-    userRef.current.focus();
+    localStorage.clear();
     localStorage.length !== 0 ? setSuccess(true) : setSuccess(false);
+    userRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const Login = () => {
       const accessToken = response?.data?.token;
       localStorage.setItem("token", accessToken);
       localStorage.setItem("correo", user);
-      setAuth({ user, pwd, accessToken });
+      //setAuth({ user, pwd, accessToken });
       setUser("");
       setPwd("");
       setSuccess(true);
