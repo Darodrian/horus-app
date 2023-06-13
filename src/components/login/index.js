@@ -4,7 +4,8 @@ import LoadingSpinner from "./../loading-spinner/index";
 import { Box, Grid } from '@mui/material';
 //import AuthContext from "../auth-provider";
 
-const url = "https://apihorus.caschile.cl/auth/login";
+//const url = "https://apihorus.caschile.cl/auth/login";
+const url = "http://192.168.50.35:6060/auth/login";
 
 const Login = () => {
   const userRef = useRef();
@@ -45,7 +46,7 @@ const Login = () => {
       setUser("");
       setPwd("");
       setSuccess(true);
-      window.location.href = "/mapa";
+      window.location.href = "/cajas/1/2023";
     } catch (err) {
       document.getElementById("error").style.color = "red";
       if (!err?.response) {
@@ -67,7 +68,7 @@ const Login = () => {
       {success ? ( 
         <Box textAlign="center">
           <LoadingSpinner>
-            {window.location.href = "/mapa"}
+            {window.location.href = "/cajas/1/2023"}
           </LoadingSpinner>
         </Box>
         ) : (

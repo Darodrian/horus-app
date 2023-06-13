@@ -17,7 +17,7 @@ class GraficoBarras extends React.Component {
     super(props);
 
     this.state = {
-      caja: '',
+      caja: '', año: '',
       // To avoid unnecessary update keep all options in the state.
       chartOptions: {
         chart: {
@@ -60,7 +60,10 @@ class GraficoBarras extends React.Component {
           series: [{
             data: [0,0,0]              
         
-          }]
+          }],
+          accessibility: {
+            enabled: false
+          }
       },
       hoverData: null
     };
@@ -69,13 +72,16 @@ class GraficoBarras extends React.Component {
   componentDidMount(){
 
     const caja = this.props.params.caja;
+    const año = this.props.params.año;
     const config = {
           headers: {
            'Authorization': `Bearer ${localStorage.getItem("token")}`
           }
     }
 
-    var url = 'https://apihorus.caschile.cl/graficos/graficoAnual/' + caja;
+    //var url = 'https://apihorus.caschile.cl/graficos/graficoAnual/' + caja;
+    //var url = 'http://192.168.50.35:6060/cajas/' + caja + '/' + año;
+    var url = 'http://localhost:6060/cajas/1/2023';
     
 
     //Obtener el total de todas las cajas
@@ -113,7 +119,7 @@ class GraficoBarras extends React.Component {
     const { chartOptions, hoverData } = this.state;
 
     return (
-      <div class="p-4">
+      <div className="p-4">
         <HighchartsReact
           highcharts={Highcharts}
           options={chartOptions}

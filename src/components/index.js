@@ -12,17 +12,20 @@ function App() {
   return (
     <>
       <Header />
-      <Router>
-        <Routes>
-          <Route path="/" exact element={<Inicio />} />
-          <Route path="/mapa" element={<PrivateRoute />}>
-            <Route path="/mapa" element={<Mapa />} />
-          </Route>
-          <Route path="/grafico1/:caja" element={<PrivateRoute />}>
-            <Route path="/grafico1/:caja" element={<GraficoBarras />} />
-          </Route>
-        </Routes>
-      </Router>
+        <Router>
+          <Routes>
+            <Route path="/" exact element={<Inicio />} />
+            <Route path="/mapa" element={<PrivateRoute />}>
+              <Route path="/mapa" element={<Mapa />} />
+            </Route>
+            <Route path="/grafico1/:caja" element={<PrivateRoute />}>
+              <Route path="/grafico1/:caja" element={<GraficoBarras />} />
+            </Route>
+            <Route path="/cajas/:caja/:año" element={<PrivateRoute />}>
+              <Route path="/cajas/:caja/:año" element={<GraficoBarras />}/>
+            </Route>
+          </Routes>
+        </Router>
       <Footer />
     </>
   );
