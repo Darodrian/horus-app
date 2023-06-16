@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import GraficoBarras from "./chart";
-import Inicio from "./login";
-import Mapa from "./map";
-import Header from "./header";
-import Footer from "./footer";
-import PrivateRoute from "./private-route";
+
+import PrivateRoute from './helpers/private-route';
+import Login from "./layout/login";
+import Header from "./layout/header";
+import Footer from "./layout/footer";
+import GraficoBarras from "./layout/chart";
 
 function App() {
   return (
@@ -14,15 +14,9 @@ function App() {
       <Header />
         <Router>
           <Routes>
-            <Route path="/" exact element={<Inicio />} />
-            <Route path="/mapa" element={<PrivateRoute />}>
-              <Route path="/mapa" element={<Mapa />} />
-            </Route>
-            <Route path="/grafico1/:caja" element={<PrivateRoute />}>
-              <Route path="/grafico1/:caja" element={<GraficoBarras />} />
-            </Route>
-            <Route path="/cajas/:caja/:año" element={<PrivateRoute />}>
-              <Route path="/cajas/:caja/:año" element={<GraficoBarras />}/>
+            <Route path="/" element={<Login />}/>
+            <Route path="/cajas/:caja/:year" element={<PrivateRoute/>}>
+              <Route path="/cajas/:caja/:year" element={<GraficoBarras />}/>
             </Route>
           </Routes>
         </Router>

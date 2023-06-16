@@ -1,11 +1,11 @@
 import { useRef, useState, useEffect, useContext } from "react";
-import axios from "axios";
-import LoadingSpinner from "./../loading-spinner/index";
 import { Box, Grid } from '@mui/material';
-//import AuthContext from "../auth-provider";
+import axios from "axios";
+import AuthContext from "../../helpers/auth-provider";
+import LoadingSpinner from "./../../helpers/loading-spinner";
 
 //const url = "https://apihorus.caschile.cl/auth/login";
-const url = "http://192.168.50.35:6060/auth/login";
+const url = "http://192.168.0.6:6060/auth/login";
 
 const Login = () => {
   const userRef = useRef();
@@ -15,7 +15,7 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-  //const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
 
   useEffect(() => {
     localStorage.length !== 0 ? setSuccess(true) : setSuccess(false);
@@ -28,7 +28,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       setLoading(true);
       const response = await axios.post(
@@ -38,11 +37,10 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-
       const accessToken = response?.data?.token;
       localStorage.setItem("token", accessToken);
       localStorage.setItem("correo", user);
-      //setAuth({ user, pwd, accessToken });
+      setAuth({ user, pwd, accessToken });
       setUser("");
       setPwd("");
       setSuccess(true);
@@ -72,43 +70,33 @@ const Login = () => {
           </LoadingSpinner>
         </Box>
         ) : (
-        <div className="Login">
+        <div className="login">
           <Grid container rowSpacing={4} alignItems="center" justifyContent="center" >
             <Grid item xs={12}>
               <Box textAlign="center">
-
-                <div className="Titulo" > Login</div>
-
+                <div className="login-title" > Login</div>
               </Box>
             </Grid>
-
             <form onSubmit={handleSubmit}>
-
               <Grid item xs={12}>
                 <Box textAlign="center" lineHeight={3}>
-
                   <div className="form-group">
                     <label htmlFor="username">Usuario</label>
-
                     <input
                       type="text"
                       id="username"
                       className="form-control"
                       ref={userRef}
-                      autoComplete="off"
                       onChange={(e) => setUser(e.target.value)}
                       value={user}
                       aria-describedby="help"
                       placeholder="Ingresa tu Usuario"
                     />
                   </div>
-
                 </Box>
               </Grid>
-
               <Grid item xs={12}>
                 <Box textAlign="center" lineHeight={3}>
-
                   <div className="form-group">
                     <label htmlFor="password">Contraseña</label>
                     <input
@@ -120,13 +108,11 @@ const Login = () => {
                       placeholder="Contraseña"
                     />
                   </div>
-
                 </Box>
               </Grid>
               <br />
               <Grid item xs={12}>
                 <Box textAlign="center" lineHeight={3}>
-
                   <p id="error" className="form-error" ref={errRef}>
                     {errMsg}
                   </p>
@@ -134,12 +120,9 @@ const Login = () => {
                     Entrar
                   </button>
                   <div>{loading ? <LoadingSpinner /> : <></>}</div>
-
                 </Box>
               </Grid>
-
             </form>
-
           </Grid>
         </div>
       )}
