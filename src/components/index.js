@@ -1,14 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import PrivateRoute from './helpers/private-route';
 import Login from "./layout/login";
 import Header from "./layout/header";
 import Footer from "./layout/footer";
 import GraficoBarras from "./layout/chart";
 
-function App() {
+const App = () => {
   return (
     <>
       <Header />
