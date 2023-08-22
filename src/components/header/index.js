@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import logo from "../../../assets/logoblanco.png";
+import logo from "../../assets/logoblanco.png";
 
 const Header = () => {
   const [isLoggedIn, setLogin] = useState();
@@ -31,13 +31,13 @@ const Header = () => {
         {isLoggedIn ? (
           <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="#" className="nav-link text-white">
+              <a href="/#" className="nav-link text-white">
                 {user}
               </a>
             </li>
             <li>
               <a
-                href="#"
+                href="/#"
                 className="nav-link text-white"
                 onClick={handleLogout}
               >
