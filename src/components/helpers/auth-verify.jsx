@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import withRouter from "../with-router";
+import withRouter from "./with-router";
 
 const parseJwt = (token) => {
   try {
@@ -24,7 +24,7 @@ const AuthVerify = (props) => {
     }
   }, [location]);
 
-  return <div></div>;
+  return <></>;
 };
 
 export default withRouter(AuthVerify);

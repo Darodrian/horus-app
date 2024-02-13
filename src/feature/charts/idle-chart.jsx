@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 
-const MyComponent = () => {
+const IdleChart = () => {
   const [chartType, setChartType] = useState("line");
   const [data, setData] = useState([
     { x: 1, y: 2 },
@@ -18,7 +18,12 @@ const MyComponent = () => {
                 type: chartType,
                 borderRadius: 20,
                 borderColor: 'darkgray',
-                borderWidth: 1
+                borderWidth: 1,
+                events: {
+                  load() {
+                    setTimeout(this.reflow.bind(this), 0);
+                  }
+                }
             },
             title: {
                 text: "My Chart",
@@ -37,7 +42,10 @@ const MyComponent = () => {
                 {
                     data: data,
                 },
-            ]
+            ],
+            accessibility: {
+              enabled: false
+            }
         }
     };
 
@@ -55,7 +63,7 @@ const MyComponent = () => {
   }, []);
 
   return (
-    <div>
+    <div className="chart">
       <HighchartsReact
         highcharts={Highcharts}
         options={options.chartOptions}
@@ -64,4 +72,4 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default IdleChart;

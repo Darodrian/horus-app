@@ -1,12 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
-import PrivateRoute from "./helpers/private-route";
-import AuthVerify from "./helpers/auth-verify";
-import Login from "./login";
-import Header from "./header";
-import Body from "./body";
-import Footer from "./footer";
+import "./style.css";
+
+import PrivateRoute from "../helpers/private-route";
+import AuthVerify from "../helpers/auth-verify";
+
+import Header from "../layout/header";
+import Body from "../layout/body";
+import Footer from "../layout/footer";
+
+import Login from "../../feature/auth/login";
 
 const App = () => {
   const logOut = () =>{

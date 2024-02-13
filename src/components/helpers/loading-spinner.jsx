@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../style/main.css";
+import "../app/style.css";
 
 const LoadingSpinner = () => {
   return (

@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import LoadingSpinner from "../helpers/loading-spinner";
+import LoadingSpinner from "../../components/helpers/loading-spinner";
 
 //const url = "https://apihorus.caschile.cl/auth/login";
-const url = "http://192.168.0.4:6060/auth/login";
+const url = "http://192.168.0.8:6060/auth/login";
 
 const Login = () => {
   const userRef = useRef();

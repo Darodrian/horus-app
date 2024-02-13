@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
-import withRouter from "../helpers/with-router";
 import Drilldown from 'highcharts/modules/drilldown.js';
+import withRouter from "../../components/helpers/with-router";
 Drilldown(Highcharts);
 
 Highcharts.setOptions({
@@ -23,13 +23,18 @@ const Chart = (props) =>  {
   const year = props.data.yearSelected;
   const chartType = props.data.chartTypeSelected;
   //var url = 'https://apihorus.caschile.cl/cajas/' + caja + '/' + year;
-  var url = 'http://192.168.0.4:6060/cajas/' + caja + '/' + year;
+  var url = 'http://192.168.0.8:6060/cajas/' + caja + '/' + year;
   const [options , setOptions] = useState({
     chart: {
       type: chartType,
       borderRadius: 20,
       borderColor: 'darkgray',
-      borderWidth: 1
+      borderWidth: 1,
+      events: {
+        load() {
+          setTimeout(this.reflow.bind(this), 0);
+        }
+      }
     },
     colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
     title: {
@@ -218,7 +223,7 @@ const Chart = (props) =>  {
   }, [chartType])
 
   return (
-    <div id="chart" className="chart">
+    <div className="chart">
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

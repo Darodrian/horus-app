@@ -1,5 +1,6 @@
 import React from "react";
-import LoadingSpinner from "../helpers/loading-spinner";
+import LoadingSpinner from "../../components/helpers/loading-spinner";
+import Switch from "react-switch";
 
 const generateArrayOfCajas = () => {
     const data = [
@@ -57,6 +58,9 @@ const Control = (props) => {
         }
         event.currentTarget.disabled = true;
     }
+    const handleSwitchChange = nextChecked => {
+        props.data.setCheck(nextChecked);
+    }
 
     return (
         <div className="controls">
@@ -73,17 +77,31 @@ const Control = (props) => {
                         return <option key={key} value={year}>{year}</option>
                     })}
                 </select>
+                &nbsp;&nbsp;
+                <div>
+                    <div className="switch">
+                        <Switch
+                            onChange={handleSwitchChange}
+                            checked={props.data.check}
+                            height={20}
+                            width={48}
+                            onColor="#83C4FF"
+                            onHandleColor="#428FDE"
+                            uncheckedIcon={false}
+                            checkedIcon={false}
+                        />
+                    </div>
+                    &nbsp;Modo avanzado&nbsp;
+                </div>
             </div>
             <div className="box">
                 <input id="column" type="button" onClick={handleChartTypeClick} value="Column Chart" className="norStatus"/>&nbsp;
                 <input id="bar" type="button" onClick={handleChartTypeClick} value="Bar Chart" className="norStatus"/>&nbsp;
                 <input id="pie" type="button" onClick={handleChartTypeClick} value="Pie Chart" className="norStatus"/>&nbsp;
-            </div>
-            <div className="box">
                 <input id="line" type="button" onClick={handleChartTypeClick} value="Line Chart" className="norStatus"/>&nbsp;
-                <input id="spline" type="button" onClick={handleChartTypeClick} value="Spline Chart" className="norStatus"/>&nbsp;
+                <input id="spline" type="button" onClick={handleChartTypeClick} value="Spline Chart" className="norStatus"/>
             </div>
-            {props.loading ? <div className="box"><LoadingSpinner/></div> : <></>}
+            {props.loading ? <div className="spinner-box"><LoadingSpinner/></div> : <></>}
             {props.msg === "" ? <></> : <div id="msgControl" className="box">{props.msg}</div>}
         </div>
     )

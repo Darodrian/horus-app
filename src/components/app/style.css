@@ -1,7 +1,4 @@
 html, body, #root {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
   background-color: #d1d5d8 !important;
 }
 
@@ -9,7 +6,14 @@ html, body, #root {
   background-color: #418fde;
 }
 .header-logo {
-  height: 60px;
+  height: 56px;
+}
+.header-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .footer {
@@ -17,6 +21,11 @@ html, body, #root {
   left:0;
   bottom:0;
   right:0;
+}
+.footer-content {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #3F4756;
 }
 
 .login {
@@ -49,31 +58,44 @@ html, body, #root {
 .body {
   display: flex;
   flex-direction: column;
+  margin-bottom: 72px;
 }
 .content {
+  display: flex;
+  justify-content: center;
+}
+.chart-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  flex: 0.85;
 }
 .chart {
-  flex: 0.5;
+  flex: 1;
+  flex-basis: 48%;
   margin: 10px;
-  min-width: 400px;
+  min-width: 320px;
 }
 .controls {
   flex: 0.2;
-  margin: 10px;
-  /* padding: 20px; */
-  background: silver;
-  border-radius: 20px;
-  min-width: 400px;
+  background: #A3ACBD;
+  min-width: 320px;
 }
 .box {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   padding: 10px;
+}
+.switch {
+  justify-content: center;
+}
+.spinner-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #msgControl {
   color: red;
@@ -98,5 +120,5 @@ html, body, #root {
 }
 .spinner-container {
   display: inline-block;
-  margin: 20px;
+  margin: 10px;
 }

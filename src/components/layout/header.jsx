@@ -20,33 +20,26 @@ const Header = () => {
 
   return (
     <div className="header">
-      <div className="container text-white d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start p-3">
-        <a
-          href="/"
-          className="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
-        >
+      <div className="header-content container">
+        <a href="/" className="me-lg-auto">
           <img className="header-logo" src={logo} alt="Cas-Chile Logo" />
         </a>
 
         {isLoggedIn ? (
-          <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <ul className="nav">
             <li>
               <a href="/#" className="nav-link text-white">
                 {user}
               </a>
             </li>
             <li>
-              <a
-                href="/#"
-                className="nav-link text-white"
-                onClick={handleLogout}
-              >
+              <a href="/#" className="nav-link text-white" onClick={handleLogout}>
                 Cerrar Sesion
               </a>
             </li>
           </ul>
         ) : (
-          <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+          <ul className="nav">
             <li>
               <a href="/" className="nav-link text-white">
                 Iniciar Sesion
@@ -54,6 +47,7 @@ const Header = () => {
             </li>
           </ul>
         )}
+        
       </div>
     </div>
   );
